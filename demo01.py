@@ -1,6 +1,10 @@
-# -*- coding:utf-8 -*
+# -*- coding:utf-8 -*-
 
-#注意开头
+#注意事项
+# 1. Pycharm中的编码方式以及.py文件的开头语句
+# 2. Pycharm的一些配置 eg：快捷键，解释器，虚拟机等
+# 3. Pycharm如何打开shell命令窗口
+# 4. Pycharm与git和github/githubdesk的配合使用 eg：从github中clone项目，上传项目到github等等（如何上传到指定repository？）
 
 # 1 first program
 
@@ -216,6 +220,100 @@ print('退出函数fun3的a的值',a)
 
 
 
-#  lesson_2   2019_7_8
-#
-# 123123123
+#  lesson_2   2019_7_8_one
+
+# 17 Python中的常用标准库函数
+
+
+# import math
+# import os
+# import random
+# import datetime    etc..
+
+
+# 18 Python的异常处理机制
+
+#形式一
+
+try:
+    x = int(input('input a value'))
+    y = int(input('input another value'))
+    print(r'x/y = ',x/y)
+
+except ZeroDivisionError:
+    print('出现除零错误')
+except ValueError:
+    print('出现值错误')
+
+
+#形式二
+
+try:
+    x = int(input('input a value'))
+    y = int(input('input another value'))
+    print(r'x/y = ',x/y)
+
+except Exception as err:
+    print(err)
+
+
+#形式三 与 else 配合使用
+
+
+try:
+    x = int(input('input a value'))
+    y = int(input('input another value'))
+    print(r'x/y = ',x/y)
+
+except Exception as err:
+    print(err)
+
+else:
+    print('没有捕捉到异常')
+
+
+#形式四 与 final 配合使用
+
+try:
+    x = int(input('input a value'))
+    y = int(input('input another value'))
+    print(r'x/y = ',x/y)
+
+except Exception as err:
+    print(err)
+
+finally:
+    print('不管捕捉没捕捉到异常，都要执行该语句')
+
+
+#形式五 与 循环结构和break配合使用（注意break放置的位置）
+
+
+#形式六 上下文管理器（常配合文件操作和数据库管理操作一起使用）
+
+# with open('text.txt') as f:
+#     for res in f:
+#         print(res,end = '')
+
+# 19 Python 本地数据获取
+
+#文件操作流程
+#1.打开文件（路径，打开方式，缓冲方式，编码方式等等参数）
+#2.操作文件（读文件，写文件，追加文件，改变文件指针等，还有一些f_obj的方法可以使用）
+#3.关闭文件
+#注：上述操作可以放在上下文管理器中进行（文件打开，操作，默认关闭）
+
+#例：
+
+with open(r'E:\PythonProject\lesson_19_7_7\test1.txt','w+') as f:          #还有其他默认参数，缓冲方式-1、0、>=1
+    f.write('Hello World!')
+    f.seek(0,0)                                                           #有默认参数 0 1 2
+    print(f.read(5))
+    print(f.read())
+
+with open(r'E:\PythonProject\lesson_19_7_7\test1.txt','r') as f1:
+    with open(r'E:\PythonProject\lesson_19_7_7\test2.txt','w') as f2:
+        str = f1.readlines()
+        f2.writelines(str)
+
+
