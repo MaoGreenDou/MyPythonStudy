@@ -116,3 +116,14 @@ def foo(args1,*args2,**args3):
     print(args3)
 
 foo('Hello', ' this', ' is', ' winterfell', a1=3000, a2=3000, a3=5000)
+
+## 4 集合
+
+list = ['li','wang','wang','zhao','sun']
+aSet = set(list)
+print(aSet)
+
+print(set('winter is coming'))
+
+#集合的关系运算，并，补，对称差，包含，真包含
+#可以通过运算符重载，也可以通过函数
