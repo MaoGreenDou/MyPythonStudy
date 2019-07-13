@@ -66,8 +66,8 @@ array.resize(2,3)
 
 array = np.array([1,2,3])
 bArray = np.array([4,5,6])
-cArray = np.vstack(array,bArray)
-cArray = np.hstack(array,bArray)
+cArray = np.vstack((array,bArray))
+cArray = np.hstack((array,bArray))
 
 ## 6 矩阵的运算
 
@@ -105,13 +105,13 @@ array1 = np.dot(array,array)        #内积
 
 ## 9 numpy中的通用函数（C语言级别的实现，速度较快相对于math模块来说，用来处理大量数据）
 
-x = np.arange(0,100,0.01)
+x = np.arange(0,10000,0.01)
 t_m1 = time.clock()
 for i,t in enumerate(x):
     x[i] = math.pow(math.sin(t),2)
 t_m2 = time.clock()
 
-y = np.arange(0,100,0.01)
+y = np.arange(0,10000,0.01)
 t_n1 = time.clock()
 y = np.power(np.sin(y),2)
 t_n2 = time.clock()
@@ -120,4 +120,4 @@ print("MATH:",t_m2 - t_m1)
 print("NUMPY:",t_n2-t_n1)
 
 
-##########上面的代码有三个问题，一个是stack那里的问题，两个是通用函数的问题，为什么要用enumrate，为什么下面不用循环，为什么时间不符合理论
+
