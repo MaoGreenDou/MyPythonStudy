@@ -26,7 +26,7 @@ df.iloc[:2,1]
 
 df['name'] = 'userName'
 
-# del df['wage']    删除一列
+# del df['wage']    删除一列     也可以用df.drop()方法来避免对原始数据的操作，函数参数可以加上axis等
 
 ## 3 Data中的统计功能
 
