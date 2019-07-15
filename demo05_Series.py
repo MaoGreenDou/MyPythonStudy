@@ -49,3 +49,4 @@ ser1.index.name = 'staff_name'
 
 
 ##### 仍存在的问题：注释掉的line_22
+##### 原因：line_22中的每个元素的数据类型是str类型
