@@ -197,3 +197,12 @@ for i in range(len(quotesdf)):
 tempdf = quotesdf.copy()
 tempdf['month'] = templist
 print(tempdf['month'].value_counts())
+
+
+## Grouping
+
+tempdf.groupby('month').count()
+
+tempdf.groupby('month').volume.sum()    #效率比 tempdf.groupby('month').sum().volume 高
+
+#####Tips：学会用dir查看属性，学会用help查看帮助
