@@ -50,7 +50,7 @@ quotes = retrieve_quotes_historical('IBM')
 list1 = []
 for i in range(len(quotes)):
     x = date.fromtimestamp(quotes[i]['date'])
-    y = date.strftime(x, '%Y---%m---%d')
+    y = date.strftime(x, '%Y-%m-%d')
     list1.append(y)
 quotesdf_ori = pd.DataFrame(quotes, index=list1)
 print(quotesdf_ori)
@@ -64,7 +64,7 @@ print(quotesdf)
 cols = ['code','name','lasttrade']    #自定义djidf的列索引
 djidf.columns = cols
 
-quotesdf.index = range(1,len(quotes)+1)    #自定义quotesdf的行索引
+# quotesdf.index = range(1,len(quotes)+1)    #自定义quotesdf的行索引
 
 dates = pd.date_range('20170520',periods=7)    #生成一个时间序列
 datesdf = pd.DataFrame(np.random.randn(7,3),index=dates,columns=list('ABC'))
@@ -113,3 +113,51 @@ djidf.shape
 
 #当步长为正时：只能从左往右遍历（对索引的正负无要求）
 #当步长为负时：只能从右往左遍历（对索引的正负无要求）
+
+
+##数据的选择
+
+#数据的选择包括如下：
+#选择一行
+#选择一列
+#选择一片区域
+#选择满足条件的部分
+
+## 1 行操作
+ #可以使用切片的部分操作（不支持全部的切片操作）
+quotesdf['2019-07-30':'2019-08-01']
+
+## 2 列操作
+ #不支持切片操作
+ #可以使用标签访问
+quotesdf.open
+
+## 3 loc操作 loc[行，列]
+#注：这里最外层中括号里的行和列指的都是标签，不要和切片操作混淆
+
+djidf.loc[1:5,['code','lasttrade']]
+
+djidf.loc[:,['code','name','lasttrade']]
+
+djidf.loc[[1,5],['code','lasttrade']]
+
+
+ #特别的如果要选择某一个值，可以用at进行操作
+
+djidf.loc[1,'lasttrade']
+djidf.at[1,'lasttrade']
+
+## 4 iloc操作
+#注： 这里的数字指的是物理位置，和切片操作相同
+
+djidf.iloc[0:6,[0,2]]
+
+djidf.iloc[[0,2],[0,2]]
+
+djidf.iloc[-5:,[0,2]]
+
+
+## 5 选择满足条件的区域
+#直接在中括号里加上条件判断即可
+
+djidf[(djidf.lasttrade>=200)&(djidf.lasttrade<=300)]    #注意数据类型
