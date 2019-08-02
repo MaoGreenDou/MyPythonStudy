@@ -7,6 +7,7 @@ import pandas as pd
 import json
 import numpy as np
 from datetime import date
+import time
 
 
 ##  1 获取道指股票成分并且存入到一个DataFrame中去
@@ -164,3 +165,35 @@ djidf.iat[1,2]
 #直接在中括号里加上条件判断即可
 
 djidf[(djidf.lasttrade>=200)&(djidf.lasttrade<=300)]    #注意数据类型
+
+
+
+## 简单数据统计与处理
+
+djidf.lasttrade.mean()
+
+djidf[djidf.lasttrade>100].name
+
+#相邻两天收盘价的涨跌情况
+
+status = np.sign(np.diff(quotesdf.close))
+status[np.where(status==1)].size
+status[np.where(status==-1)].size
+
+
+#最近交易前三甲公司
+
+tempdf = djidf.sort_values(by='lasttrade',ascending=False)
+tempdf[:3].name
+
+
+#统计近一年每个月的股票开盘天数
+
+templist = []
+for i in range(len(quotesdf)):
+    temp = time.strptime(quotesdf.index[i],"%Y-%m-%d")
+    templist.append(temp.tm_mon)
+
+tempdf = quotesdf.copy()
+tempdf['month'] = templist
+print(tempdf['month'].value_counts())
