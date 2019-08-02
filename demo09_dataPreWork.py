@@ -50,9 +50,10 @@ quotes = retrieve_quotes_historical('IBM')
 list1 = []
 for i in range(len(quotes)):
     x = date.fromtimestamp(quotes[i]['date'])
-    y = date.strftime(x, '%Y-%m-%d')
+    y = date.strftime(x, '%Y---%m---%d')
     list1.append(y)
 quotesdf_ori = pd.DataFrame(quotes, index=list1)
+print(quotesdf_ori)
 quotesdf = quotesdf_ori.drop(['date'], axis=1)
 print(quotesdf)
 
@@ -69,3 +70,46 @@ dates = pd.date_range('20170520',periods=7)    #生成一个时间序列
 datesdf = pd.DataFrame(np.random.randn(7,3),index=dates,columns=list('ABC'))
 
 ## 4 line_52 && line_53 自定义了quotesdf的行序列
+
+
+
+##下面进行数据显示环节
+##可以利用之前提到的切片操作
+##也可以用df提供的函数
+
+djidf.index
+print(list(djidf.index))    #查看列索引
+
+djidf.columns
+print(list(djidf.columns))    #查看行索引
+
+print(djidf.values)    #查看数据内容（不包括行索引和列索引）
+
+print(djidf.describe)    #查看对数据的描述
+
+djidf.lasttrade    #查看指定索引的数据内容，数据标签，数据类型
+
+djidf.head(5)
+djidf[:5]
+
+djidf.tail(5)
+djidf[-5:]
+
+djidf.lasttrade
+
+djidf.size    #同下，不包括索引所占行和列
+
+djidf.shape
+
+
+
+#### 暂时对切片操作的理解
+#切片操作有两个冒号，三个数字
+#序列有正负两组索引
+
+#第一个数字代表起始位置：默认为0
+#第二个数字代表结束为止：默认为序列长加一
+#第三个数字代表步长：默认为1
+
+#当步长为正时：只能从左往右遍历（对索引的正负无要求）
+#当步长为负时：只能从右往左遍历（对索引的正负无要求）
