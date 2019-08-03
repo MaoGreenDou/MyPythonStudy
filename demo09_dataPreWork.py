@@ -206,3 +206,26 @@ tempdf.groupby('month').count()
 tempdf.groupby('month').volume.sum()    #效率比 tempdf.groupby('month').sum().volume 高
 
 #####Tips：学会用dir查看属性，学会用help查看帮助
+
+
+
+## Merge
+
+#Merge有三种方式
+
+#append
+#concat
+#join
+op1 = djidf[:5]
+op2 = djidf[:-6:-1]
+#e.g:append
+op1.append(op2)
+
+#e.g:concat
+pd.concat([op1.drop('lasttrade',axis=1),op2],ignore_index=True)
+
+
+#e.g:merge
+op3 = op1.drop(['lasttrade','name'],axis=1)
+# pd.merge(op2,op3,on='code')     #错，只能增加列
+pd.merge(op1,op3,on='code')
