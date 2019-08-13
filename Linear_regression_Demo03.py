@@ -111,7 +111,48 @@ def drawIter(X, Y, theta, h, alpha, count):
     plt.show()
 
 
+#linear gradient descent with regularization
+def graDes(theta, X, Y, alpha, h,lam=0):
+    '''theta is a col vector,X is feature
+    martix(one row is one attruibute),Y
+    is target (a col vector),alpha is study
+    rate,h is hopotheis function, lam is
+    punishment parameters'''
+    tempTheta = theta    # 保证theta是同时更新
+    for i in range(len(theta)):
+        sum = 0
+        for j in range(len(Y)):
+            temp = float( (hy(X[j].T, theta) - Y[j]) * X[j,i] )
+            sum += temp
+        if i!=0:
+            tempTheta[i] = theta[i]*(1-alpha*lam/len(Y)) - alpha*1/len(Y)*sum
+        else:
+            tempTheta[i] = theta[i] - alpha * 1 / len(Y) * sum    # 不对theta[0]进行惩罚
+    return tempTheta
+
+
+# 定义正规方程法的正则化
+
+def nEuqa(X, Y,lam=0):
+    '''X is featuer martix,Y is target(col vector),
+    lam is punishment parameters'''
+    temp1 = np.dot(X.T, X)
+    punish = np.ones(temp1.shape)
+    punish[0] = 0
+    punish[:,0] = 0
+    temp2 = np.linalg.pinv(temp1 + lam*punish)
+    temp3 = np.dot(temp2, X.T)
+    temp4 = np.dot(temp3, Y)
+    return temp4
+
 # client code
-dt = np.array([[65.0652905, 1.5233249, -18.09139454]]).T
-res = np.array([res]).T
-drawIter(dataX, Y, res, hy, 0.003, 100)
+# dt = np.array([[65.0652905, 1.5233249, -18.09139454]]).T
+# res = np.array([res]).T
+# drawIter(dataX, Y, res, hy, 0.003, 100)
+
+X = np.array([[1,0],[1,1],[1,2],[1,3]])
+Y = np.array([0,1,2,3])
+Y = Y.reshape(-1,1)
+theta = np.zeros((2,1))
+alpha = 0.03
+graDes(theta, X, Y, alpha, hy,lam=0)
