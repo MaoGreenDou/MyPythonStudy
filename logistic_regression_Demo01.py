@@ -49,7 +49,7 @@ lhy's, lhy is hypothesis'''
 
 
 # draw J and #iter 's scatter
-def drawIter(X, Y, theta, h, alpha, count):
+def drawIter(X, Y, theta, h, alpha, count,lam=0):
     '''X is feature martix(onw row is one record),Y is target(a col
     vector),theta is a col vector'''
     figIter, axIter = plt.subplots()
@@ -58,7 +58,7 @@ def drawIter(X, Y, theta, h, alpha, count):
     listY = []
     listY.append(lcostJ(X, Y, theta, h))
     for i in range(count):
-        theta = lgraDes(X, Y, theta, alpha, h)
+        theta = lgraDes(X, Y, theta, alpha, h,lam)
         listY.append(lcostJ(X, Y, theta, h))
         if i == count - 1:
             res = theta
