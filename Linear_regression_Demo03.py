@@ -91,7 +91,7 @@ def graDes(defaultTheta, X, Y, alpha, h):
 # 绘制迭代图像
 
 
-def drawIter(X, Y, theta, h, alpha, count):
+def drawIter(X, Y, theta, h, alpha, count,lam=0):
     '''X is feature martix(onw row is one record),Y is target(a col
     vector),theta is a col vector'''
     figIter, axIter = plt.subplots()
@@ -100,7 +100,7 @@ def drawIter(X, Y, theta, h, alpha, count):
     listY = []
     listY.append(costJ(X, Y, theta, h))
     for i in range(count):
-        theta = graDes(theta, X, Y, alpha, h)
+        theta = graDes(theta, X, Y, alpha, h,lam)
         listY.append(costJ(X, Y, theta, h))
     listX = np.arange(count + 1)
     axIter.scatter(listX, listY)
